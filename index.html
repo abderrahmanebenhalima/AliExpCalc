@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AliExpress Calculator with Redotpay</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        #result,#costInUSD {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">AliExpress Calculator with Redotpay</h2>
+        <div class="form-group">
+            <label for="amount">The Amount:</label>
+            <input type="number" class="form-control" id="amount" value="0.0">
+        </div>
+        <div class="form-group">
+            <label for="currency">The Currency Value :</label>
+            <input type="number" class="form-control" id="currency" value="230">
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="hasDeliveryFees" checked>
+            <label class="form-check-label" for="hasDeliveryFees">Has Algeria Poste Delivery Fees (130 DA) </label>
+        </div>
+        <button class="btn btn-primary" onclick="calculateTotal()">Calculate</button>
+        <p id="costInUSD" >Total cost in USD is : 0 USD</p>
+        <p id="result">Total is: 0 DA</p>
+        <p class="text-left text-muted" style="font-size: 0.8em; border-top: 1px solid #ccc; padding-top: 10px;">
+            Developed by Abderrahmane BENHALIMA
+        </p>
+
+
+
+    </div>
+
+    <script>
+        function calculateTotal() {
+            const amount = parseFloat(document.getElementById('amount').value) || 0;
+            const currency = parseFloat(document.getElementById('currency').value) || 230;
+            const hasDeliveryFees = document.getElementById('hasDeliveryFees').checked;
+
+            const total = ((amount + amount / 100) * currency) + (hasDeliveryFees ? 130 : 0);
+            const totalUSD= (amount + amount / 100) ;
+            document.getElementById('costInUSD').innerText= `Total cost in USD is : ${totalUSD.toFixed(2)} USD`; 
+            document.getElementById('result').innerText = `Total is: ${total.toFixed(2)} DA`;
+        }
+    </script>
+
+</body>
+</html>
